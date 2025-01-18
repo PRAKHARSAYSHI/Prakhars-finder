@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prakhar's Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            padding: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input, select {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9e9e9;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Prakhar's Finder</h1>
+    <div class="container">
+        <p>I'm here to help you find a homeless shelter in your area. Please choose a district and input a municipality or county.Make sure that you capatalize properly</p>
+        
+        <!-- Form to select county or municipality -->
+        <label for="choice">Do you want to use a county or municipality?</label>
+        <select id="choice">
+            <option value="municipality">Municipality</option>
+            <option value="county">County</option>
+        </select>
+        
+        <!-- Input for searching -->
+        <label for="searchInput">Enter your municipality or county:</label>
+        <input type="text" id="searchInput" placeholder="Enter municipality or county" />
+        
+        <!-- Submit button -->
+        <button onclick="searchDistrict()">Search</button>
+        
+        <!-- Result Display -->
+        <div id="result"></div>
+    </div>
+    
+    <script>
+        const shelterLinks = {
+            "Atlantic City": "https://acrescuemission.org/",
+            "Family Promise CMC": "https://familypromisecmc.org/",
+            "Cumberland": "https://www.cumberlandcountynj.gov/filestorage/22641/22643/22917/22937/Homeless_Referral_Flow_Chart_Family_2024.pdf",
+            "Avalon": "https://www.homelessshelterdirectory.org/city/nj-avalon",
+            "Bridgeton": "https://homelesssolutions.org/",
+            "Cape May Point": "https://www.capeatlanticresourcenet.org/search/family-promise-of-cape-may-county/#:~:text=(609)%20846%2D7862&text=Family%20Promise%20of%20Cape%20May%20County%20is%20a%20program%20designed,only%20accepts%20families%20with%20children.",
+            "Commercial": "https://www.homelessshelterdirectory.org/city/nj-commercial_township",
+            "Cumberland Family Shelter": "https://cumberlandfamilyshelter.com/about/",
+            "Dennis Township": "https://www.homelessshelterdirectory.org/city/nj-dennis_township",
+            "Estell Manor": "https://www.findhelp.org/housing/temporary-shelter--estell-manor-nj?postal=08319&cursor=10&limit=10",
+            "Fairfield": "https://www.findhelp.org/housing/temporary-shelter--fairfield-nj",
+            "Lawrenceville": "https://www.findhelp.org/housing/temporary-shelter--lawrence-township-nj",
+            "Lower": "https://www.homelessshelterdirectory.org/city/nj-lower_township",
+            "Maurice River": "https://www.homelessshelterdirectory.org/city/nj-maurice_river_township",
+            "Middle Township": "https://www.homelessshelterdirectory.org/city/nj-middle_township",
+            "Millville": "https://www.findhelp.org/housing/temporary-shelter--millville-nj",
+            "North Wildwood": "https://www.findhelp.org/housing/temporary-shelter--wildwood-nj",
+            "Ocean City": "https://www.findhelp.org/housing/temporary-shelter--ocean-city-nj",
+            "Sea Isle City": "https://www.homelessshelterdirectory.org/city/nj-sea_isle_city",
+            "Stone Harbor": "https://www.homelessshelterdirectory.org/city/nj-stone_harbor",
+            "Vineland": "https://www.findhelp.org/housing/temporary-shelter--vineland-nj",
+            "West Cape May": "https://www.findhelp.org/housing/temporary-shelter--cape-may-nj",
+            "West Wildwood": "https://www.findhelp.org/housing/temporary-shelter--wildwood-nj",
+            "Weymouth": "https://www.homelessshelterdirectory.org/city/nj-weymouth_township",
+            "Wildwood Crest": "https://www.theextendedhandministry.org/about_us",
+            "Woodbine": "https://www.findhelp.org/housing/temporary-shelter--woodbine-nj",
+            "Absecon": "https://www.findhelp.org/housing/temporary-shelter--absecon-nj",
+            "Brigantine": "https://www.findhelp.org/housing/temporary-shelter--brigantine-nj",
+            "Egg Harbor Township": "https://www.findhelp.org/housing/temporary-shelter--egg-harbor-township-nj",
+            "Galloway Township": "https://www.homelessshelterdirectory.org/city/nj-galloway_township",
+            "Hamilton": "https://www.homelessshelterdirectory.org/city/nj-hamilton_township",
+            "Linwood": "https://www.shelterlist.com/city/nj-linwood",
+            "Longport": "https://www.homelessshelterdirectory.org/city/nj-longport"
+        };
+
+        function searchDistrict() {
+            const choice = document.getElementById('choice').value;
+            const searchInput = document.getElementById('searchInput').value.trim();
+
+            let resultText = "";
+
+            if (shelterLinks[searchInput]) {
+                resultText = `The homeless shelter link for ${searchInput} is: <a href="${shelterLinks[searchInput]}" target="_blank">${shelterLinks[searchInput]}</a>, if you need any help or need someone to talk to please call 988.`;
+            } else {
+                resultText = `Sorry, we don't have a shelter link for ${searchInput}. Please try another location.`;
+            }
+
+            document.getElementById('result').innerHTML = resultText;
+        }
+    </script>
+</body>
+</html>
